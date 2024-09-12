@@ -1,29 +1,22 @@
-import { FormEvent, useState } from 'react';
+import { IoIosSearch } from "react-icons/io";
 
 export default function SearchBar({
+  search,
   onSearch,
 }: {
+  search: string;
   onSearch: (search: string) => void;
 }) {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    onSearch(searchTerm);
-  };
-
   return (
-    <form onSubmit={handleSubmit} className=''>
+    <div className='flex items-center justify-between w-[250px] px-3 py-1 text-[16px] rounded-[8px] border border-black/10 outline-none bg-white'>
       <input
         type='text'
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        value={search}
+        onChange={(e) => onSearch(e.target.value)}
         placeholder='Search products...'
-        className=''
+        className=' outline-none  text-[16px]'
       />
-      <button type='submit' className=''>
-        Search
-      </button>
-    </form>
+      <IoIosSearch size={16} />
+    </div>
   );
 }
