@@ -2,10 +2,10 @@ import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Wrapper from '@/components/Wrapper';
 import { fetchProductDetails } from '@/utils/api';
+import AddToCardButton from '@/components/Button/AddToCardButton';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const response = await fetchProductDetails(params.id);
-  console.log(response);
   return (
     <div className='min-h-screen bg-[#F4F4F4] font-montserrat'>
       <Navbar />
@@ -42,9 +42,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                   {response.category}
                 </p>
               </div>
-              <div className='bg-black text-white rounded-[8px] text-center px-4 py-2.5 cursor-pointer font-bold my-5'>
-                ADD TO CART
-              </div>
+              <AddToCardButton product={response} />
             </div>
           </div>
         </Wrapper>
