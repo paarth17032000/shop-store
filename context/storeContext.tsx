@@ -143,7 +143,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
   };
-  console.log(state);
+
   return (
     <CartContext.Provider
       value={{ state, addToCart, removeFromCart, updateQuantity, clearCart }}
