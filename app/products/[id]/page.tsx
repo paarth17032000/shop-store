@@ -20,8 +20,10 @@ export default async function Page({ params }: { params: { id: string } }) {
             <MdOutlineArrowBackIos size={28} />
           </Link>
 
-          <FaRegHeart size={28} className='md:hidden block' />
-          <CartButtonIcon />
+          <div className='flex items-center gap-4'>
+            <FaRegHeart size={28} className='md:hidden block' />
+            <CartButtonIcon />
+          </div>
         </div>
       </Wrapper>
 
