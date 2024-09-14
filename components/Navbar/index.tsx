@@ -12,6 +12,7 @@ export default function Navbar() {
         </Link>
         <CartButtonIcon />
       </div>
+     
     </Wrapper>
   );
 }

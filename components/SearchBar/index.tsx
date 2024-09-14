@@ -1,14 +1,21 @@
-import { IoIosSearch } from "react-icons/io";
+import { IoIosSearch } from 'react-icons/io';
 
 export default function SearchBar({
   search,
   onSearch,
+  className,
 }: {
   search: string;
   onSearch: (search: string) => void;
+  className?: string;
 }) {
   return (
-    <div className='flex items-center justify-between w-[250px] px-3 py-1 text-[16px] rounded-[8px] border border-black/10 outline-none bg-white'>
+    <div
+      className={`flex items-center w-[250px] px-5 py-2.5 text-[16px] text-[#8B8B8B] rounded-[10px] border border-black/10 outline-none bg-white ${className}`}
+    >
+      <div>
+        <IoIosSearch size={16} className='mr-2' color='#8B8B8B' />
+      </div>
       <input
         type='text'
         value={search}
@@ -16,7 +23,6 @@ export default function SearchBar({
         placeholder='Search products...'
         className=' outline-none  text-[16px]'
       />
-      <IoIosSearch size={16} />
     </div>
   );
 }
