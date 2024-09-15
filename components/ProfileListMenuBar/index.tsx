@@ -1,14 +1,14 @@
 import React from 'react';
+import Image from 'next/image';
 import PageIcon from '@/components/IconComponents/page-icon.svg';
 import ListIcon from '@/components/IconComponents/list-icon.svg';
-import WhishlistIcon from '@/components/IconComponents/whishlist-icon.svg';
 import ProfileIcon from '@/components/IconComponents/profile-icon.svg';
-import Image from 'next/image';
 import CartButtonIcon from '../CartButtonIcon';
+import WhishlistIconComponent from '../IconComponents/WhishlistIconComponent';
 
 export default function ProfileListMenuBar() {
   return (
-    <div className='bg-black text-white flex items-center justify-around fixed bottom-0 left-0 right-0 h-[60px]'>
+    <div className='bg-black text-white flex items-center justify-around fixed bottom-0 left-0 right-0 h-[60px] md:hidden block'>
       <div className='w-full flex justify-center h-auto'>
         <Image
           width={22}
@@ -28,16 +28,10 @@ export default function ProfileListMenuBar() {
         />
       </div>
       <div className='w-full flex justify-center h-auto'>
-        <CartButtonIcon />
+        <CartButtonIcon color='white' />
       </div>
       <div className='w-full flex justify-center h-auto'>
-        <Image
-          width={22}
-          height={22}
-          src={WhishlistIcon}
-          alt='menu_icon'
-          className='w-[22px] h-[22px]'
-        />
+        <WhishlistIconComponent color='white' />
       </div>
       <div className='w-full flex justify-center h-auto'>
         <Image

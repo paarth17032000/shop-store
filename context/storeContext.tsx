@@ -2,14 +2,6 @@
 import { Product } from '@/utils/types';
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
-// Define types
-// interface Product {
-//   id: number;
-//   title: string;
-//   price: number;
-//   // Add other product properties as needed
-// }
-
 interface CartItem extends Product {
   quantity: number;
 }
@@ -22,14 +14,14 @@ interface CartState {
 type CartAction =
   | { type: 'ADD_TO_CART'; payload: Product }
   | { type: 'REMOVE_FROM_CART'; payload: number }
-  | { type: 'UPDATE_QUANTITY'; payload: { id: number; updateType: string } }
+  | { type: 'UPDATE_QUANTITY'; payload: { id: number; quantity: number } }
   | { type: 'CLEAR_CART' };
 
 interface CartContextType {
   state: CartState;
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
-  updateQuantity: (productId: number, updateType: string) => void;
+  updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
 }
 
@@ -74,45 +66,30 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return {
         ...state,
         items: state.items.filter((item) => item.id !== action.payload),
-        total: parseFloat((state.total - itemToRemove.price * itemToRemove.quantity).toFixed(2)),
+        total: parseFloat(
+          (state.total - itemToRemove.price * itemToRemove.quantity).toFixed(2)
+        ),
       };
     }
+
     case 'UPDATE_QUANTITY': {
-      const { id, updateType } = action.payload;
+      const { id, quantity } = action.payload;
       const item = state.items.find((item) => item.id === id);
       if (!item) return state; // Item not found, return state unchanged
-    
-      if (updateType === 'increment') {
-        // Increment the quantity and update the total
-        return {
-          ...state,
-          items: state.items.map((item) =>
-            item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-          ),
-          total: parseFloat((state.total + item.price).toFixed(2)), // Add price of one unit
-        };
-      } else if (updateType === 'decrement') {
-        if (item.quantity === 1) {
-          // If quantity is 1, remove the item completely and subtract its full price
-          return {
-            ...state,
-            items: state.items.filter((item) => item.id !== id),
-            total: parseFloat((state.total - item.price).toFixed(2)), // Subtract the price of the last item
-          };
-        } else {
-          // Decrement quantity and update the total
-          return {
-            ...state,
-            items: state.items.map((item) =>
-              item.id === id ? { ...item, quantity: item.quantity - 1 } : item
-            ),
-            total: parseFloat((state.total - item.price).toFixed(2)), // Subtract price of one unit
-          };
-        }
-      }
-      return state;
+
+      // Calculate the difference in quantity
+      const quantityDifference = quantity - item.quantity;
+
+      return {
+        ...state,
+        items: state.items.map((item) =>
+          item.id === id ? { ...item, quantity: quantity } : item
+        ),
+        total: parseFloat(
+          (state.total + quantityDifference * item.price).toFixed(2)
+        ),
+      };
     }
-    
 
     case 'CLEAR_CART':
       return initialState;
@@ -133,10 +110,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'REMOVE_FROM_CART', payload: productId });
   };
 
-  const updateQuantity = (productId: number, updateType: string) => {
+  const updateQuantity = (productId: number, quantity: number) => {
     dispatch({
       type: 'UPDATE_QUANTITY',
-      payload: { id: productId, updateType },
+      payload: { id: productId, quantity },
     });
   };
 

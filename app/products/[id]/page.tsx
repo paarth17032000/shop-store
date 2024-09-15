@@ -1,13 +1,12 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import Wrapper from '@/components/Wrapper';
-import { fetchProductDetails } from '@/utils/api';
 import AddToCardButton from '@/components/Button/AddToCardButton';
-import { PiCurrencyDollarSimple } from 'react-icons/pi';
-import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { FaRegHeart } from 'react-icons/fa';
-import Link from 'next/link';
+import WhishlistIconComponent from '@/components/IconComponents/WhishlistIconComponent';
+import { fetchProductDetails } from '@/utils/api';
 import CartButtonIcon from '@/components/CartButtonIcon';
-
+import { MdOutlineArrowBackIos } from 'react-icons/md';
+import { PiCurrencyDollarSimple } from 'react-icons/pi';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const response = await fetchProductDetails(params.id);
@@ -21,9 +20,11 @@ export default async function Page({ params }: { params: { id: string } }) {
             <MdOutlineArrowBackIos size={28} />
           </Link>
 
-          <div className='flex items-center gap-4'>
-            <FaRegHeart size={28} className='md:hidden block' />
-            <CartButtonIcon />
+          <div className='flex items-bottom gap-4'>
+            <div className='md:hidden block'>
+              <WhishlistIconComponent color='black' />
+            </div>
+            <CartButtonIcon color='black' />
           </div>
         </div>
       </Wrapper>
@@ -176,4 +177,3 @@ export default async function Page({ params }: { params: { id: string } }) {
 //     </div>
 //   );
 // }
-
