@@ -10,8 +10,9 @@ export default function AddToCardButton({
   product: Product;
   className?: string;
 }) {
-  const { addToCart } = useCart();
+  const { addToCart, setOpenToast } = useCart();
   const handleAddToCart = (product: Product) => {
+    setOpenToast(true);
     addToCart(product);
   };
   return (

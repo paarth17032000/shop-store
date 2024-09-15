@@ -1,6 +1,13 @@
 'use client';
+import ToastContainer from '@/components/ToastContainer';
 import { Product } from '@/utils/types';
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  ReactNode,
+  useState,
+} from 'react';
 
 interface CartItem extends Product {
   quantity: number;
@@ -23,6 +30,7 @@ interface CartContextType {
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
+  setOpenToast: (openToast: boolean) => void;
 }
 
 // Create the context
@@ -101,6 +109,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 // Provider component
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [openToast, setOpenToast] = useState<boolean>(false);
 
   const addToCart = (product: Product) => {
     dispatch({ type: 'ADD_TO_CART', payload: product });
@@ -123,9 +132,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ state, addToCart, removeFromCart, updateQuantity, clearCart }}
+      value={{
+        state,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        setOpenToast,
+      }}
     >
       {children}
+      <ToastContainer open={openToast} setOpen={setOpenToast} />
     </CartContext.Provider>
   );
 }

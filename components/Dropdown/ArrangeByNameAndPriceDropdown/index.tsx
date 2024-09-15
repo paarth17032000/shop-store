@@ -13,13 +13,14 @@ type ArrangeDropdownOption = {
 };
 
 const ArrangeDropdownOptionList: ArrangeDropdownOption[] = [
+  { name: 'Name', value: 'name' },
   { name: 'Price: Low to High', value: 'price-asc' },
   { name: 'Price: High to Low', value: 'price-desc' },
-  { name: 'Name', value: 'name' },
 ];
 
 export default function SortDropdown({ onSort }: SortDropdownProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedFilter, setSelectedFilter] = useState<string>('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
@@ -28,6 +29,7 @@ export default function SortDropdown({ onSort }: SortDropdownProps) {
 
   const handleSelect = (sortOption: string) => {
     onSort(sortOption);
+    setSelectedFilter(sortOption);
     setIsOpen(false);
   };
 
@@ -81,13 +83,16 @@ export default function SortDropdown({ onSort }: SortDropdownProps) {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className='absolute right-0 z-10 mt-2 w-[175px] bg-white border border-black/10 rounded-[8px] shadow-lg'>
-          <ul className='py-1'>
+        <div className='absolute right-0 z-10 mt-2 w-[200px] bg-white border border-black/10 rounded-[8px] shadow-lg'>
+          <ul className='px-2'>
             {ArrangeDropdownOptionList.map((arrangOptionObj) => (
               <li
                 key={arrangOptionObj.name}
                 onClick={() => handleSelect(arrangOptionObj.value)}
-                className='px-3 py-2 cursor-pointer hover:bg-gray-100 text-[16px] text-gray-700'
+                className={`px-3 py-2 cursor-pointer text-[16px] text-gray-700
+               rounded-[8px] transition-colors duration-300 my-1.5
+               ${selectedFilter === arrangOptionObj.value ? 'bg-black/90 text-white' : 'hover:bg-gray-100'}
+             `}
               >
                 {arrangOptionObj.name}
               </li>

@@ -34,7 +34,6 @@ export default function ProfileListMenuBar() {
       </div>
       <div className='w-full flex justify-center h-auto'>
         <WhishlistIconComponent color='white' />
-        {/* <WhishlistIconComponent  /> */}
       </div>
       <div className='w-full flex justify-center h-auto'>
         <Image

@@ -58,7 +58,6 @@ export default function FilterDropdown({ onFilter }: FilterDropdownProps) {
         onClick={toggleDropdown}
         className='inline-flex justify-betweentext-[16px] font-medium text-gray-700'
       >
-        {/* {selectedCategory === 'all' ? 'All Categories' : selectedCategory} */}
         <div className='w-full flex justify-center h-auto'>
           <Image
             width={22}
@@ -87,12 +86,13 @@ export default function FilterDropdown({ onFilter }: FilterDropdownProps) {
       {/* Dropdown Menu */}
       {isOpen && (
         <div className='absolute right-0 z-10 mt-2 w-[200px] bg-white border border-black/10 rounded-[8px] shadow-lg'>
-          <ul className='py-1'>
+          <ul className='px-2'>
             {filterOptions.map((filterOptionObj) => (
               <li
                 key={filterOptionObj.name}
                 onClick={() => handleSelect(filterOptionObj.value)}
-                className={`px-3 py-2 cursor-pointer text-[16px] text-gray-700 
+                className={`px-3 py-2 cursor-pointer text-[16px] text-gray-700
+               rounded-[8px] transition-colors duration-300 my-1.5
                     ${selectedCategory === filterOptionObj.value ? 'bg-black/90 text-white' : 'hover:bg-gray-100'}
                 `}
               >
