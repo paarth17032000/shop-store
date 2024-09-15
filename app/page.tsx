@@ -13,6 +13,8 @@ import WhishlistIcon from '@/components/IconComponents/whishlist-icon-black.svg'
 import ArrangeIcon from '@/components/IconComponents/arrange-icon.svg';
 import FilterIcon from '@/components/IconComponents/filter-icon.svg';
 import { BsCurrencyDollar } from 'react-icons/bs';
+import ArrangeByNameAndPrice from '@/components/Dropdown/ArrangeByNameAndPriceDropdown';
+import FilterDropdown from '@/components/Dropdown/CategoryDropdown';
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -126,28 +128,11 @@ export default function Home() {
               className='hidden md:block'
             />
             <div className='flex flex-col md:flex-row md:gap-8 gap-4 hidden md:block'>
-              <select
-                className='px-3 py-1.5 w-[175px] text-[16px] rounded-[8px] border border-black/10 outline-none bg-white pb-2'
-                onChange={(e) => handleSort(e.target.value)}
-              >
-                <option value=''>Sort by</option>
-                <option value='price-asc'>Price: Low to High</option>
-                <option value='price-desc'>Price: High to Low</option>
-                <option value='name'>Name</option>
-              </select>
-              <select
-                className='px-3 py-1.5 w-[200px] text-[16px] rounded-[8px] border border-black/10 outline-none bg-white'
-                onChange={(e) => handleFilter(e.target.value)}
-              >
-                <option value='all'>All Categories</option>
-                <option value='electronics'>Electronics</option>
-                <option value='jewelry'>Jewelry</option>
-                <option value="men's clothing">Men&apos;s Clothing</option>
-                <option value="women's clothing">Women&apos;s Clothing</option>
-              </select>
+              <ArrangeByNameAndPrice onSort={handleSort} />
+              <FilterDropdown onFilter={handleFilter} />
             </div>
           </div>
-          <div className='grid grid-cols-2 lg:grid-cols-3 lg:gap-10 gap-4 lg:px-28 mt-5'>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-10 gap-4 lg:px-28 mt-5 mb-20'>
             {filteredProducts.map((product) => (
               <Link
                 href={`/products/${product.id}`}

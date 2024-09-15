@@ -10,7 +10,7 @@ export default function Navbar() {
         <Link href='/' className='font-bold text-[24px]'>
           SS
         </Link>
-        <CartButtonIcon />
+        <CartButtonIcon color='black' />
       </div>
      
     </Wrapper>
