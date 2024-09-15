@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import './globals.css';
 import { CartProvider } from '@/context/storeContext';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Shopper's Stop ",
+  title: "Shopper's Stop",
   description: 'One stop shopping solution for everyone.',
 };
 

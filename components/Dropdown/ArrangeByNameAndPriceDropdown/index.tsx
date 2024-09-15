@@ -1,11 +1,24 @@
 'use client';
+import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
+import ArrangeIcon from '@/components/IconComponents/arrange-icon.svg';
 
 interface SortDropdownProps {
   onSort: (sortOption: string) => void;
 }
 
-const SortDropdown: React.FC<SortDropdownProps> = ({ onSort }) => {
+type ArrangeDropdownOption = {
+  name: string;
+  value: string;
+};
+
+const ArrangeDropdownOptionList: ArrangeDropdownOption[] = [
+  { name: 'Price: Low to High', value: 'price-asc' },
+  { name: 'Price: High to Low', value: 'price-desc' },
+  { name: 'Name', value: 'name' },
+];
+
+export default function SortDropdown({ onSort }: SortDropdownProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -39,11 +52,19 @@ const SortDropdown: React.FC<SortDropdownProps> = ({ onSort }) => {
       {/* Dropdown Button */}
       <button
         onClick={toggleDropdown}
-        className='inline-flex justify-between w-[175px] px-3 py-1.5 rounded-[8px] border border-black/10 bg-white text-[16px] font-medium text-gray-700'
+        className='inline-flex justify-betweentext-[16px] font-medium text-gray-700'
       >
-        Sort by
+        <div className='w-full flex justify-center h-auto'>
+          <Image
+            width={22}
+            height={22}
+            src={ArrangeIcon}
+            alt='menu_icon'
+            className='w-[22px] h-[22px]'
+          />
+        </div>
         <svg
-          className={`ml-2 w-4 h-4 transform transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+          className={`ml-2 w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
           viewBox='0 0 24 24'
@@ -62,29 +83,18 @@ const SortDropdown: React.FC<SortDropdownProps> = ({ onSort }) => {
       {isOpen && (
         <div className='absolute right-0 z-10 mt-2 w-[175px] bg-white border border-black/10 rounded-[8px] shadow-lg'>
           <ul className='py-1'>
-            <li
-              onClick={() => handleSelect('price-asc')}
-              className='px-3 py-2 cursor-pointer hover:bg-gray-100 text-[16px] text-gray-700'
-            >
-              Price: Low to High
-            </li>
-            <li
-              onClick={() => handleSelect('price-desc')}
-              className='px-3 py-2 cursor-pointer hover:bg-gray-100 text-[16px] text-gray-700'
-            >
-              Price: High to Low
-            </li>
-            <li
-              onClick={() => handleSelect('name')}
-              className='px-3 py-2 cursor-pointer hover:bg-gray-100 text-[16px] text-gray-700'
-            >
-              Name
-            </li>
+            {ArrangeDropdownOptionList.map((arrangOptionObj) => (
+              <li
+                key={arrangOptionObj.name}
+                onClick={() => handleSelect(arrangOptionObj.value)}
+                className='px-3 py-2 cursor-pointer hover:bg-gray-100 text-[16px] text-gray-700'
+              >
+                {arrangOptionObj.name}
+              </li>
+            ))}
           </ul>
         </div>
       )}
     </div>
   );
-};
-
-export default SortDropdown;
+}

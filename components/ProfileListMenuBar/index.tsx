@@ -1,10 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+
+import CartButtonIcon from '../CartButtonIcon';
+import WhishlistIconComponent from '@/components/IconComponents/WhishlistIconComponent';
+
 import PageIcon from '@/components/IconComponents/page-icon.svg';
 import ListIcon from '@/components/IconComponents/list-icon.svg';
 import ProfileIcon from '@/components/IconComponents/profile-icon.svg';
-import CartButtonIcon from '../CartButtonIcon';
-import WhishlistIconComponent from '../IconComponents/WhishlistIconComponent';
 
 export default function ProfileListMenuBar() {
   return (
@@ -32,6 +34,7 @@ export default function ProfileListMenuBar() {
       </div>
       <div className='w-full flex justify-center h-auto'>
         <WhishlistIconComponent color='white' />
+        {/* <WhishlistIconComponent  /> */}
       </div>
       <div className='w-full flex justify-center h-auto'>
         <Image

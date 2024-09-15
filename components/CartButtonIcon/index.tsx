@@ -1,8 +1,10 @@
 'use client';
 import React, { useState } from 'react';
+
 import { useCart } from '@/context/storeContext';
 import CartSideDrawer from '../CartSideDrawer';
 import CartIconComponent from '../IconComponents/CartIconComponent';
+
 import { IoCloseCircleOutline } from 'react-icons/io5';
 
 export default function CartButtonIcon({ color = 'white' }: { color: string }) {
@@ -37,7 +39,7 @@ export default function CartButtonIcon({ color = 'white' }: { color: string }) {
 
         {/* Scrollable content */}
         <div className='overflow-y-auto h-[calc(100vh-60px)]  no-scrollbar'>
-          <CartSideDrawer />
+          <CartSideDrawer setMenu={setMenu} />
         </div>
       </div>
     </>

@@ -1,16 +1,24 @@
 'use client';
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { useCart } from '@/context/storeContext';
+import { useRouter } from 'next/navigation';
+
 import Wrapper from '../Wrapper';
+import { useCart } from '@/context/storeContext';
 import QuantityDropdown from '../Dropdown/QuantityDropdown';
+
+import { BsCurrencyDollar } from 'react-icons/bs';
 import WhishlistIcon from '@/components/IconComponents/whishlist-icon-black.svg';
 import RemoveIcon from '@/components/IconComponents/remove-icon.svg';
-import { BsCurrencyDollar } from 'react-icons/bs';
 
-export default function CartSideDrawer() {
+export default function CartSideDrawer({
+  setMenu,
+}: {
+  setMenu: (menu: boolean) => void;
+}) {
+  const router = useRouter();
   const { state, clearCart, removeFromCart } = useCart();
+  // TODO: pagination
 
   return (
     <>
@@ -21,12 +29,15 @@ export default function CartSideDrawer() {
             <div className='font-regular text-[18px] mb-5'>
               Currently there are no items in the cart.
             </div>
-            <Link
-              href='/'
-              className='bg-black/90 hover:bg-black text-white trasition duration-300 linear rounded-[8px] text-center px-4 py-3 cursor-pointer font-bold mt-4'
+            <div
+              onClick={() => {
+                router.push('/');
+                setMenu(false);
+              }}
+              className='bg-black/90 hover:bg-b lack text-white cursor-pointer trasition duration-300 linear rounded-[8px] text-center px-4 py-2.5 cursor-pointer font-bold mt-4'
             >
               See Our Products
-            </Link>
+            </div>
           </Wrapper>
         </div>
       ) : (
