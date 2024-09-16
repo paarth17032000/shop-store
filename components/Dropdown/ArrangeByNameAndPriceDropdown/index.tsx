@@ -27,12 +27,14 @@ export default function SortDropdown({ onSort }: SortDropdownProps) {
     setIsOpen((prev) => !prev);
   };
 
+  // selecting the sort option
   const handleSelect = (sortOption: string) => {
     onSort(sortOption);
     setSelectedFilter(sortOption);
     setIsOpen(false);
   };
 
+  // handling for closing menu when user clicks out of the select box
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -65,6 +67,7 @@ export default function SortDropdown({ onSort }: SortDropdownProps) {
             className='w-[22px] h-[22px]'
           />
         </div>
+        {/* svg that rotates based on opening/closing menu */}
         <svg
           className={`ml-2 w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}
           xmlns='http://www.w3.org/2000/svg'

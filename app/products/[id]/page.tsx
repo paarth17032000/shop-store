@@ -80,6 +80,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                 </p>
                 <hr className='my-3 bg-black/30' />
               </div>
+
+              {/* add to cart button */}
               <AddToCardButton product={response} className='mt-12' />
             </div>
           </div>

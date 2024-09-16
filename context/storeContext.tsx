@@ -45,6 +45,7 @@ const initialState: CartState = {
 // Reducer function
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
+
     case 'ADD_TO_CART': {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
@@ -66,6 +67,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         total: parseFloat((state.total + action.payload.price).toFixed(2)),
       };
     }
+
     case 'REMOVE_FROM_CART': {
       const itemToRemove = state.items.find(
         (item) => item.id === action.payload
@@ -83,7 +85,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     case 'UPDATE_QUANTITY': {
       const { id, quantity } = action.payload;
       const item = state.items.find((item) => item.id === id);
-      if (!item) return state; // Item not found, return state unchanged
+      if (!item) return state; 
 
       // Calculate the difference in quantity
       const quantityDifference = quantity - item.quantity;
@@ -101,6 +103,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
     case 'CLEAR_CART':
       return initialState;
+      
     default:
       return state;
   }
@@ -108,7 +111,9 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
 // Provider component
 export function CartProvider({ children }: { children: ReactNode }) {
+  // state handling for cart events
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  // state for handling the toast notification when item is added to cart 
   const [openToast, setOpenToast] = useState<boolean>(false);
 
   const addToCart = (product: Product) => {

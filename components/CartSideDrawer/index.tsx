@@ -13,34 +13,34 @@ import RemoveIcon from '@/components/IconComponents/remove-icon.svg';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 
 export default function CartSideDrawer({
-  menu,
-  setMenu,
+  openSideDrawer,
+  setOpenSideDrawer,
 }: {
-  menu: boolean;
-  setMenu: (menu: boolean) => void;
+  openSideDrawer: boolean;
+  setOpenSideDrawer: (openSideDrawer: boolean) => void;
 }) {
   const router = useRouter();
   const { state, clearCart, removeFromCart } = useCart();
 
   // Manage body scroll when the drawer is open
   useEffect(() => {
-    document.body.style.overflow = menu ? 'hidden' : 'auto';
+    document.body.style.overflow = openSideDrawer ? 'hidden' : 'auto';
     return () => {
       document.body.style.overflow = 'auto'; // Reset when component unmounts
     };
-  }, [menu]);
+  }, [openSideDrawer]);
 
   return (
     <div
       className={`fixed top-0 right-0 bottom-0 z-[60]  md:w-[350px] w-full bg-[#F4F4F4] shadow-lg 
       border-l-[1.5px] border-black/30 transform transition-transform duration-500 ease-in-out ${
-        menu ? 'translate-x-0' : 'translate-x-full'
+        openSideDrawer ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
       <div className='flex flex-col h-full'>
         {/* Close Button */}
         <button
-          onClick={() => setMenu(false)}
+          onClick={() => setOpenSideDrawer(false)}
           className='flex justify-end w-full text-black text-xl mt-3 px-4'
         >
           <IoCloseCircleOutline size={30} />
@@ -49,6 +49,7 @@ export default function CartSideDrawer({
         {/* Scrollable Content */}
         <div className='flex-1 overflow-y-auto'>
           {state.items.length === 0 ? (
+            // when no product is added to cart
             <div className='min-h-[calc(100vh-60px)] font-montserrat text-black flex flex-col items-center'>
               <Wrapper>
                 <div className='font-bold text-[28px] leading-5 my-2'>Cart</div>
@@ -58,7 +59,7 @@ export default function CartSideDrawer({
                 <div
                   onClick={() => {
                     router.push('/');
-                    setMenu(false);
+                    setOpenSideDrawer(false);
                   }}
                   className='bg-black/90 hover:bg-black text-white cursor-pointer transition duration-300 linear rounded-[8px] text-center px-4 py-2.5 cursor-pointer font-bold mt-4'
                 >
@@ -72,6 +73,7 @@ export default function CartSideDrawer({
                 <div className='font-bold w-full text-[28px] leading-5 mb-4'>
                   Cart
                 </div>
+                {/* products in cart */}
                 <div className='flex flex-col gap-2'>
                   {state.items.map((item) => (
                     <div key={item.id}>
@@ -83,7 +85,7 @@ export default function CartSideDrawer({
                             height={100}
                             src={item.image}
                             alt={item.title}
-                            className='w-[84px] h-[100px]' // Ensure consistent size and contain aspect ratio
+                            className='w-[84px] h-[100px]'
                           />
                         </div>
 
@@ -117,7 +119,7 @@ export default function CartSideDrawer({
                                 height={22}
                                 src={RemoveIcon}
                                 alt='remove_icon'
-                                className='w-[22px] h-[22px]' // Explicit sizing for consistency
+                                className='w-[22px] h-[22px]'
                               />
                             </div>
                           </div>

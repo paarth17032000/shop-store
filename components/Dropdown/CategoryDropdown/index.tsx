@@ -29,12 +29,14 @@ export default function FilterDropdown({ onFilter }: FilterDropdownProps) {
     setIsOpen((prev) => !prev);
   };
 
+  // handling selection of category
   const handleSelect = (category: string) => {
     onFilter(category);
     setSelectedCategory(category);
     setIsOpen(false);
   };
 
+  // handling for closing menu when user clicks out of the select box
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -67,6 +69,7 @@ export default function FilterDropdown({ onFilter }: FilterDropdownProps) {
             className='w-[22px] h-[22px]'
           />
         </div>
+        {/* svg that rotates based on opening/closing menu */}
         <svg
           className={`ml-2 w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}
           xmlns='http://www.w3.org/2000/svg'

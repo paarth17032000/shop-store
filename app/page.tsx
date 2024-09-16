@@ -20,12 +20,15 @@ import WhishlistIconComponent from '@/components/IconComponents/WhishlistIconCom
 import SkeletonLoader from '@/components/SkeletonLoader';
 
 export default function Home() {
+  // ****** fetched products ******
   const [products, setProducts] = useState<Product[]>([]);
+  // ****** filtered products ******
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>('');
 
+  // ****** fetching products from api ******
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -41,6 +44,7 @@ export default function Home() {
     loadProducts();
   }, []);
 
+  // ****** handling sorting of products according to price and name ******
   const handleSort = (sortType: string) => {
     const sorted = [...filteredProducts];
     switch (sortType) {
@@ -59,6 +63,7 @@ export default function Home() {
     setFilteredProducts(sorted);
   };
 
+  // ****** displaying products according to categories ******
   const handleFilter = (category: string) => {
     if (category === 'all') {
       setFilteredProducts(products);
@@ -74,6 +79,8 @@ export default function Home() {
 
   return (
     <div className='min-h-screen bg-[#F4F4F4] font-montserrat'>
+
+      {/* Header of icon, searchbar and cart button */}
       <Wrapper>
         <div className='flex items-center w-full justify-start md:justify-between my-4 gap-2.5'>
           <div className='md:hidden block'>
@@ -101,8 +108,11 @@ export default function Home() {
           </div>
         </div>
       </Wrapper>
+    
+      {/* main content page */}
       <div className='min-h-[calc(100vh-80px)]'>
         <Wrapper className='mt-5 mb-10'>
+          {/* filters */}
           <div className='flex justify-between'>
             <div>
               <h1 className='font-montserrat text-[32px] font-extrabold'>
@@ -117,6 +127,8 @@ export default function Home() {
               <FilterDropdown onFilter={handleFilter} />
             </div>
           </div>
+
+          {/* loader and products list */}
           {loading ? (
             <SkeletonLoader />
           ) : (

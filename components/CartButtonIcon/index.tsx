@@ -7,11 +7,12 @@ import CartIconComponent from '../IconComponents/CartIconComponent';
 
 export default function CartButtonIcon({ color = 'white' }: { color: string }) {
   const { state } = useCart();
-  const [menu, setMenu] = useState(false);
+  const [openSideDrawer, setOpenSideDrawer] = useState(false);
 
   return (
     <>
-      <div onClick={() => setMenu(true)} className='relative cursor-pointer'>
+      {/* cart icon button */}
+      <div onClick={() => setOpenSideDrawer(true)} className='relative cursor-pointer'>
         <div className='w-[22px] h-[22px] flex items-center justify-center'>
           <CartIconComponent color={color} />
         </div>
@@ -23,7 +24,7 @@ export default function CartButtonIcon({ color = 'white' }: { color: string }) {
       </div>
 
       {/* Side Drawer */}
-      <CartSideDrawer menu={menu} setMenu={setMenu} />
+      <CartSideDrawer openSideDrawer={openSideDrawer} setOpenSideDrawer={setOpenSideDrawer} />
     </>
   );
 }

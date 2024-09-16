@@ -10,6 +10,7 @@ import ProfileIcon from '@/components/IconComponents/profile-icon.svg';
 
 export default function ProfileListMenuBar() {
   return (
+    // lower menu for mobile screens
     <div className='bg-black text-white flex items-center justify-around fixed bottom-0 left-0 right-0 h-[60px] md:hidden block'>
       <div className='w-full flex justify-center h-auto'>
         <Image

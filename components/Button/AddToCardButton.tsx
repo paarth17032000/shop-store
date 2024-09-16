@@ -16,6 +16,7 @@ export default function AddToCardButton({
     addToCart(product);
   };
   return (
+    // handling case when product is added with add to cart button
     <div
       onClick={() => handleAddToCart(product)}
       className={`text-white rounded-[10px] text-center px-4 py-4 cursor-pointer text-[16px] font-montserrat font-bold 

@@ -15,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
+        {/* wrapping context around the app */}
         <CartProvider>{children}</CartProvider>
       </body>
     </html>

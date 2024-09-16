@@ -24,7 +24,7 @@ export default function QuantityDropdown({
     setIsOpen(false);
   };
 
-  // Close the dropdown if clicking outside
+  // handling for closing menu when user clicks out of the select box
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -49,6 +49,7 @@ export default function QuantityDropdown({
         className='inline-flex justify-between w-[150px] rounded-md text-sm font-medium text-gray-700'
       >
         Quantity: {selectedQuantity}
+        {/* svg that rotates based on opening/closing menu */}
         <svg
           className={`ml-2 w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}
           xmlns='http://www.w3.org/2000/svg'
