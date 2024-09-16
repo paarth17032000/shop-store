@@ -8,7 +8,7 @@ import { fetchProductDetails } from '@/utils/api';
 
 import CartButtonIcon from '@/components/CartButtonIcon';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { PiCurrencyDollarSimple } from 'react-icons/pi';
+import { BsCurrencyDollar } from 'react-icons/bs';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const response = await fetchProductDetails(params.id);
@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     {response.title}
                   </h3>
                   <h2 className='flex items-center font-medium font-montserrat text-[20px] lg:text-[24px]'>
-                    <PiCurrencyDollarSimple />
+                    <BsCurrencyDollar />
                     {response.price}
                   </h2>
                 </div>

@@ -32,7 +32,7 @@ export default function CartSideDrawer({
 
   return (
     <div
-      className={`fixed top-0 right-0 bottom-0 z-[60] min-h-screen md:w-[325px] w-full bg-[#F4F4F4] shadow-lg 
+      className={`fixed top-0 right-0 bottom-0 z-[60]  md:w-[350px] w-full bg-[#F4F4F4] shadow-lg 
       border-l-[1.5px] border-black/30 transform transition-transform duration-500 ease-in-out ${
         menu ? 'translate-x-0' : 'translate-x-full'
       }`}

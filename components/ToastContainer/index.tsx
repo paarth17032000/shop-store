@@ -26,7 +26,7 @@ export default function ToastContainer({
           open ? 'translate-x-0' : '-translate-x-[120vw]'
         }`}
     >
-      <div className="flex items-center justify-center h-full px-4">
+      <div className='flex items-center justify-center h-full px-4'>
         Item has been added to the cart.
       </div>
     </div>

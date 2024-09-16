@@ -10,7 +10,7 @@ export default function AddToCardButton({
   product: Product;
   className?: string;
 }) {
-  const { addToCart, setOpenToast } = useCart();
+  const { addToCart, setOpenToast, state } = useCart();
   const handleAddToCart = (product: Product) => {
     setOpenToast(true);
     addToCart(product);
@@ -18,9 +18,14 @@ export default function AddToCardButton({
   return (
     <div
       onClick={() => handleAddToCart(product)}
-      className={`bg-black text-white rounded-[10px] text-center px-4 py-4 cursor-pointer text-[16px] font-montserrat font-bold ${className}`}
+      className={`text-white rounded-[10px] text-center px-4 py-4 cursor-pointer text-[16px] font-montserrat font-bold 
+        ${className}
+        ${state.items.some((item) => item.title === product.title) ? 'pointer-events-none bg-black/80' : 'bg-black '}  
+      `}
     >
-      ADD TO CART
+      {state.items.some((item) => item.title === product.title)
+        ? 'ITEM PRESENT IN CART'
+        : 'ADD TO CART'}
     </div>
   );
 }
